@@ -28,13 +28,8 @@ class Solution:
             seq.pop()
 
         dfs(root, [])
-        for item in p_seq:
-            print(item.val, end=" ")
-        print()
-        for item in q_seq:
-            print(item.val, end=" ")
-        print()
+        q_seq_set = set(q_seq)
         while p_seq:
             cur_node = p_seq.pop()
-            if cur_node in q_seq:
+            if cur_node in q_seq_set:
                 return cur_node
