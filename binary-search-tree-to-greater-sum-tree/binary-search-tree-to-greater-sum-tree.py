@@ -8,7 +8,6 @@ class TreeNode(object):
 class Solution(object):
     def bstToGst(self, root):
         def dfs(cur, val, saved):
-            # print(cur.val)
             if not cur.left and not cur.right:
                 cur.val += saved
                 return cur.val
@@ -16,20 +15,18 @@ class Solution(object):
             right = 0
             if cur.right:
                 right = dfs(cur.right, val, saved)
-            # print(f"!{cur.val},{saved},{right}")
             cur.val += right
+
             if not right:
                 cur.val += saved
-            if not saved:
-                saved = cur.val
-            else:
-                saved = max(saved, cur.val)
-            # print(f"!{cur.val},{saved}")
+
+            saved = cur.val if not saved else max(saved, cur.val)
+
             left = 0
             if cur.left:
                 left = dfs(cur.left, cur.val, saved)
-            # print(f"!!{cur.val},{saved},{left}")
-            return max(cur.val, left)
+
+            return left if left else cur.val
 
         dfs(root, 0, 0)
         return root
