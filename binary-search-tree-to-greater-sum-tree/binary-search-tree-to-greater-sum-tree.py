@@ -15,12 +15,9 @@ class Solution(object):
             right = 0
             if cur.right:
                 right = dfs(cur.right, val, saved)
-            cur.val += right
 
-            if not right:
-                cur.val += saved
-
-            saved = cur.val if not saved else max(saved, cur.val)
+            cur.val += right if right else saved
+            saved = cur.val
 
             left = 0
             if cur.left:
