@@ -10,7 +10,7 @@ class Solution:
             temp = 0
             for point in points:
                 x, y = point
-                if (cx - x) * (cx - x) + (cy - y) * (cy - y) <= length * length:
+                if (cx - x) ** 2 + (cy - y) ** 2 <= length ** 2:
                     temp += 1
             answer.append(temp)
 
