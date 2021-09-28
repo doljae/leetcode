@@ -1,3 +1,4 @@
+[Discussion Post (created on 28/8/2021 at 11:8)](https://leetcode.com/problems/first-bad-version/discuss/1490348/Can-you-explain-what-makes-TLE-in-this-code)  
 <h2>278. First Bad Version</h2><h3>Easy</h3><hr><div><p>You are a product manager and currently leading a team to develop a new product. Unfortunately, the latest version of your product fails the quality check. Since each version is developed based on the previous version, all the versions after a bad version are also bad.</p>
 
 <p>Suppose you have <code>n</code> versions <code>[1, 2, ..., n]</code> and you want to find out the first bad one, which causes all the following ones to be bad.</p>
