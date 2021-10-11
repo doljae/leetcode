@@ -8,7 +8,7 @@ class Solution:
         start, end = 0, height * width - 1
 
         while start <= end:
-            mid = (start + end) // 2
+            mid = start + (end - start) // 2
             cur = matrix[mid // width][mid % width]
 
             if cur == target:
