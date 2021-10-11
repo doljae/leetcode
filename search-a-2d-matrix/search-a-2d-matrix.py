@@ -3,17 +3,19 @@ from typing import *
 
 class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
-        row, col = 0, len(matrix[0]) - 1
+        height, width = len(matrix), len(matrix[0])
 
-        while 0 <= row < len(matrix) and 0 <= col < len(matrix[0]):
-            cur = matrix[row][col]
+        start, end = 0, height * width - 1
+
+        while start <= end:
+            mid = (start + end) // 2
+            cur = matrix[mid // width][mid % width]
 
             if cur == target:
                 return True
-
-            if cur > target:
-                col -= 1
+            elif cur < target:
+                start = mid + 1
             else:
-                row += 1
-
+                end = mid - 1
+        
         return False
