@@ -1,10 +1,13 @@
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
         
-        maximum=0
-        for index, num in enumerate(nums[:len(nums)-1]):
+        if nums[0] == 0 and len(nums) == 1:
+            return True
+        
+        maximum = 0
+        for index, num in enumerate(nums):
             if index > maximum:
                 return False
             maximum = max(maximum, index + num)
-        
-        return maximum>=len(nums)-1
+            if maximum >= len(nums) - 1:
+                return True
