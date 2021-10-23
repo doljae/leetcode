@@ -1,8 +1,13 @@
+from collections import Counter
+
+
 class Solution:
     def longestSubstring(self, s: str, k: int) -> int:
-        
-        for char in set(list(s)):
-            if s.count(char) < k:
-                return max(self.longestSubstring(sub_str, k) for sub_str in s.split(char))
+        if len(s) < k:
+            return 0
+
+        most_uncommon_char, cnt = Counter(s).most_common()[-1]
+        if cnt < k:
+            return max(self.longestSubstring(t, k) for t in s.split(most_uncommon_char))
 
         return len(s)
