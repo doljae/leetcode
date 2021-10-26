@@ -2,24 +2,19 @@ from typing import *
 
 
 class Solution:
-    def trap(self, height: List[int]) -> int:
-        stack, answer = [], 0
+    def trap(self, heights: List[int]) -> int:
+        left, right = 0, len(heights) - 1
+        left_max, right_max = heights[left], heights[right]
+        answer = 0
+        while left < right:
+            left_max = max(left_max, heights[left])
+            right_max = max(right_max, heights[right])
 
-        for i in range(len(height)):
-            cur = height[i]
-            if not stack or (stack and height[stack[-1]] >= cur):
-                stack.append(i)
-
+            if left_max <= right_max:
+                answer += (left_max - heights[left])
+                left += 1
             else:
-                # print(stack)
-                while stack and height[stack[-1]]<=cur:
-                    target = height[stack[-1]]
-                    while stack and height[stack[-1]] == target:
-                        stack.pop()
-                    if stack:
-                        width = i - stack[-1] - 1
-                        length = min(cur, height[stack[-1]]) - target
-                        answer += width * length
-                stack.append(i)
-            # print(stack, answer)
+                answer += (right_max - heights[right])
+                right -= 1
+
         return answer
