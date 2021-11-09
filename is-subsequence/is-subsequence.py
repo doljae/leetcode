@@ -1,11 +1,7 @@
 class Solution:
     def isSubsequence(self, s: str, t: str) -> bool:
-
+        iterator = iter(t)
         for char in s:
-            index = t.find(char)
-            if index == -1:
+            if char not in iterator:
                 return False
-
-            t = t[index + 1:]
-
         return True
