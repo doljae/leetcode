@@ -11,17 +11,11 @@ class TreeNode:
 
 
 class Solution:
-    answer = []
+    def isValidBST(self, root: Optional[TreeNode], left_max=-float("inf"), right_min=float("inf")) -> bool:
+        if not root:
+            return True
 
-    def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        self.answer = []
-        def dfs(cur):
-            if cur.left:
-                dfs(cur.left)
-            self.answer.append(cur.val)
-            if cur.right:
-                dfs(cur.right)
+        if left_max >= root.val or root.val >= right_min:
+            return False
 
-        dfs(root)
-
-        return self.answer == sorted(self.answer) and len(set(self.answer)) == len(self.answer)
+        return self.isValidBST(root.left, left_max, root.val) and self.isValidBST(root.right, root.val, right_min)
