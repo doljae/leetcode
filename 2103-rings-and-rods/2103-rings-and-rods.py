@@ -11,8 +11,9 @@ class Solution:
             m[index].append(color)
         
         result = 0 
+        target = set(["B", "G", "R"])
         for key in m:
-            if set(m[key]) == set(["B", "G", "R"]):
+            if set(m[key]) == target:
                 result += 1
         
         return result
