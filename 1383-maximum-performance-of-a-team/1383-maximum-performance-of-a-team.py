@@ -17,4 +17,5 @@ class Solution:
                 sum_of_speed -= heapq.heappop(heap)
 
             result = max(result, sum_of_speed * efficiency)
+            
         return result % (pow(10, 9) + 7)
