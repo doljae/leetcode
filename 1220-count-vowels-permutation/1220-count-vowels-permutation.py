@@ -14,7 +14,7 @@ class Solution:
                 if i == 1:
                     board[i][j] = 1
                 else:
-                    board[i][j] += sum(list(map(lambda x: board[i - 1][x], index_map[j])))
+                    board[i][j] += sum(list(map(lambda x: board[i - 1][x], index_map[j]))) % (pow(10, 9) + 7)
 
             if i == n:
                 break
