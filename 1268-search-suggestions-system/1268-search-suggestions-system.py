@@ -2,9 +2,14 @@ from typing import *
 
 
 class Node:
-    key = None
-    result = None
-    next = dict()
+    key: str
+    result: set
+    next: dict
+
+    def __init__(self, key):
+        self.key = key
+        self.result = set()
+        self.next = {}
 
     def has_result(self):
         return len(self.result) > 0
@@ -14,11 +19,6 @@ class Node:
 
     def __str__(self):
         return f"key: {self.key}, result:{self.result}"
-
-    def __init__(self, key):
-        self.key = key
-        self.result = set()
-        self.next = {}
 
 
 class Solution:
