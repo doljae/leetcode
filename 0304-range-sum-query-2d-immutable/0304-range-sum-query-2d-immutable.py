@@ -13,9 +13,6 @@ class NumMatrix:
             for col in range(width):
                 matrix[row][col] += matrix[row - 1][col]
 
-        for row in matrix:
-            print(row)
-
         self.matrix = matrix
 
     def sumRegion(self, row1: int, col1: int, row2: int, col2: int) -> int:
