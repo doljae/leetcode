@@ -9,14 +9,14 @@ class Solution:
 
         # first, third, second
         third = -math.inf
-        stack = []
+        second = []
         for i in range(len(nums) - 1, -1, -1):
             first = nums[i]
             if first < third:
                 return True
 
-            while stack and nums[i] > stack[-1]:
-                third = stack.pop()
+            while second and nums[i] > second[-1]:
+                third = second.pop()
 
-            stack.append(nums[i])
+            second.append(nums[i])
         return False
