@@ -12,9 +12,6 @@ class Solution:
                 row, col = self.shift(i, j, height, width, k)
                 board[row][col] = grid[i][j]
 
-        for item in board:
-            print(item)
-
         return board
 
     def shift(self, row, col, height, width, count):
