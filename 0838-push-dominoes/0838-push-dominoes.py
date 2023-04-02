@@ -35,9 +35,6 @@ class Solution:
                         result += ["L"] * (size // 2)
                     stack = []
                     r_cnt = False
-            # print(f"stack:{stack}")
-            # print(f"result:{result}")
-            # print()
 
         if stack and stack[0] == "R":
             stack = ["R"] * len(stack)
