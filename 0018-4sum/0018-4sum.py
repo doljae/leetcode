@@ -4,7 +4,6 @@ class Solution:
 
     def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
         nums.sort()
-        print(nums)
         self.n_sum(nums, target, 4, [])
 
         return self.result
