@@ -1,27 +1,38 @@
-class Solution:  # 1084 ms, faster than 37.26%
+class Solution:
+    def __init__(self):
+        self.result = []
+
     def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
-        def dfs(l, r, k, target, path, out):  # [l, r] inclusive
-            if k == 2:
-                while l < r:
-                    if nums[l] + nums[r] == target:
-                        out.append(path + [nums[l], nums[r]])
-                        while l+1 < r and nums[l] == nums[l+1]: l += 1  # Skip duplicate nums[l]
-                        l, r = l + 1, r - 1
-                    elif nums[l] + nums[r] > target:
-                        r -= 1  # Decrease sum
-                    else:
-                        l += 1  # Increase sum
-                return
+        nums.sort()
+        print(nums)
+        self.n_sum(nums, target, 4, [])
 
-            while l < r:
-                dfs(l+1, r, k - 1, target - nums[l], path + [nums[l]], out)
-                while l+1 < r and nums[l] == nums[l+1]: l += 1  # Skip duplicate nums[i]
-                l += 1
+        return self.result
 
-        def kSum(k):  # k >= 2
-            ans = []
-            nums.sort()
-            dfs(0, len(nums)-1, k, target, [], ans)
-            return ans
+    def n_sum(self, nums, target, n, result):
+        if len(nums) < n:
+            return
+        if n < 2:
+            return
+        if target < nums[0] * n:
+            return
+        if target > nums[-1] * n:
+            return
 
-        return kSum(4)
+        if n == 2:
+            left, right = 0, len(nums) - 1
+            while left < right:
+                temp = nums[left] + nums[right]
+                if temp == target:
+                    self.result.append(result + [nums[left], nums[right]])
+                    left += 1
+                    while left < right and nums[left] == nums[left - 1]:
+                        left += 1
+                elif temp < target:
+                    left += 1
+                elif temp > target:
+                    right -= 1
+        else:
+            for i in range(len(nums) - n + 1):
+                if i == 0 or (i > 0 and nums[i - 1] != nums[i]):
+                    self.n_sum(nums[i + 1:], target - nums[i], n - 1, result + [nums[i]])
