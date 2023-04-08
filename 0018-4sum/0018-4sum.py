@@ -14,7 +14,6 @@ class Solution:
                     temp = a + b + c + d
                     if temp == target:
                         result.append([a, b, c, d])
-                        # print(f"{index1} {index2} {index3} {index4}")
                         while index3 < len(nums) - 1 and nums[index3 + 1] == c:
                             index3 += 1
                         while index4 > index2 and nums[index4 - 1] == d:
