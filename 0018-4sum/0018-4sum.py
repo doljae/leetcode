@@ -1,33 +1,26 @@
 class Solution:
-    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
-        nums.sort()
-        result = []
-        index1 = 0
-        while index1 < len(nums) - 3:
-            a = nums[index1]
-            index2 = index1 + 1
-            while index2 < len(nums) - 2:
-                b = nums[index2]
-                index3, index4 = index2 + 1, len(nums) - 1
-                while index3 < index4:
-                    c, d = nums[index3], nums[index4]
-                    temp = a + b + c + d
-                    if temp == target:
-                        result.append([a, b, c, d])
-                        while index3 < len(nums) - 1 and nums[index3 + 1] == c:
-                            index3 += 1
-                        while index4 > index2 and nums[index4 - 1] == d:
-                            index4 -= 1
-                        index3, index4 = index3 + 1, index4 - 1
-                    elif temp > target:
-                        index4 -= 1
-                    elif temp < target:
-                        index3 += 1
-                while index2 < len(nums) - 2 and nums[index2 + 1] == b:
-                    index2 += 1
-                index2 += 1
-            while index1 < len(nums) - 3 and nums[index1 + 1] == a:
-                index1 += 1
-            index1 += 1
+    def fourSum(self, nums, target):
+        def findNsum(nums, target, N, result, results):
+            if len(nums) < N or N < 2 or target < nums[0]*N or target > nums[-1]*N:  # early termination
+                return
+            if N == 2: # two pointers solve sorted 2-sum problem
+                l,r = 0,len(nums)-1
+                while l < r:
+                    s = nums[l] + nums[r]
+                    if s == target:
+                        results.append(result + [nums[l], nums[r]])
+                        l += 1
+                        while l < r and nums[l] == nums[l-1]:
+                            l += 1
+                    elif s < target:
+                        l += 1
+                    else:
+                        r -= 1
+            else: # recursively reduce N
+                for i in range(len(nums)-N+1):
+                    if i == 0 or (i > 0 and nums[i-1] != nums[i]):
+                        findNsum(nums[i+1:], target-nums[i], N-1, result+[nums[i]], results)
 
-        return result
+        results = []
+        findNsum(sorted(nums), target, 4, [], results)
+        return results
