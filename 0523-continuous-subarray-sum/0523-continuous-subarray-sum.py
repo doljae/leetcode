@@ -6,18 +6,15 @@ from typing import *
 
 class Solution:
     def checkSubarraySum(self, nums: List[int], k: int) -> bool:
+        hash_map = {0: 0}
+        s = 0
 
-        width = len(nums)
-        board = [0] * (width + 1)
-
-        for i in range(1, width + 1):
-            board[i] = board[i - 1] + nums[i - 1]
-
-        s = set()
-
-        for i in range(2, width+1):
-            s.add(board[i - 2] % k)
-            if board[i] % k in s:
+        for i in range(len(nums)):
+            s += nums[i]
+            if s % k not in hash_map:
+                hash_map[s % k] = i + 1
+            elif hash_map[s % k] < i:
                 return True
-
+            # print(hash_map)
         return False
+
