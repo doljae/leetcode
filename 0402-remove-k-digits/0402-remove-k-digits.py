@@ -24,6 +24,8 @@ class Solution:
             result.popleft()
 
         r = "".join(list(result))
+        
         if len(r) == 0 or len(r) <= left:
             return "0"
+        
         return r[:len(r) - left]
