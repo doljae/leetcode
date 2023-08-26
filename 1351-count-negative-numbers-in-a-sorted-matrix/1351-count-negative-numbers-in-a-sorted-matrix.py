@@ -6,8 +6,16 @@ class Solution:
         result = 0
 
         for i in range(len(grid)):
-            for j in range(len(grid[0])):
-                if grid[i][j] < 0:
-                    result += 1
+            board = grid[i]
+            left, right = 0, len(board) - 1
+
+            while left <= right:
+                mid = (left + right) // 2
+                if board[mid] < 0:
+                    right = mid - 1
+                else:
+                    left = mid + 1
+
+            result += (len(board) - left)
 
         return result
