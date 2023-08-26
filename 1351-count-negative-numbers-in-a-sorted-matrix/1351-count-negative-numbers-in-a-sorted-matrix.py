@@ -4,18 +4,13 @@ from typing import List
 class Solution:
     def countNegatives(self, grid: List[List[int]]) -> int:
         result = 0
-
+        row = grid[0]
+        target = len(row) - 1
         for i in range(len(grid)):
-            board = grid[i]
-            left, right = 0, len(board) - 1
 
-            while left <= right:
-                mid = (left + right) // 2
-                if board[mid] < 0:
-                    right = mid - 1
-                else:
-                    left = mid + 1
+            while target >= 0 > grid[i][target]:
+                target -= 1
 
-            result += (len(board) - left)
+            result += (len(row) - (target + 1))
 
         return result
