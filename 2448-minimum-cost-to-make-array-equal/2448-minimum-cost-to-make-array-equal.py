@@ -1,6 +1,8 @@
 from typing import *
 
 
+# Weighted median
+
 class Solution:
     def minCost(self, nums: List[int], cost: List[int]) -> int:
         if len(set(nums)) == 1:
