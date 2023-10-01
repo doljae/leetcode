@@ -4,9 +4,7 @@ from typing import List
 class Solution:
     def longestArithSeqLength(self, nums: List[int]) -> int:
 
- 
-
-        result = 0
+        result = 2
         board = [{} for _ in range(len(nums))]
 
         for i in range(len(nums)):
