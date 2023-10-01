@@ -1,16 +1,21 @@
+from typing import List
+
+
 class Solution:
     def longestArithSeqLength(self, nums: List[int]) -> int:
+
         n = len(nums)
         if n <= 2:
             return n
 
-        longest = 2
-        dp = [{} for _ in range(n)]
+        result = 2
+        board = [{} for _ in range(n)]
 
-        for i in range(n):
+        for i in range(len(nums)):
             for j in range(i):
-                diff = nums[i] - nums[j]
-                dp[i][diff] = dp[j].get(diff, 1) + 1
-                longest = max(longest, dp[i][diff])
+                gap = nums[i] - nums[j]
+                board[i][gap] = board[j].get(gap, 1) + 1
 
-        return longest
+                result = max(result, board[i][gap])
+
+        return result
