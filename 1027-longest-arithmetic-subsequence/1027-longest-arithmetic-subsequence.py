@@ -6,7 +6,7 @@ class Solution:
 
  
 
-        result = 2
+        result = 0
         board = [{} for _ in range(len(nums))]
 
         for i in range(len(nums)):
