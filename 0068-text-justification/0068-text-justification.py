@@ -1,80 +1,58 @@
 from collections import deque
 from typing import List
 
-
 class Solution:
     def fullJustify(self, words: List[str], maxWidth: int) -> List[str]:
         result = []
-        temp = []
+        current_line = []
         words = deque(words)
 
         while words:
-            cur = words[0]
-            if not temp:
-                temp.append(words.popleft())
+            current_word = words[0]
+
+            if not current_line:
+                current_line.append(words.popleft())
             else:
-                temp_length = 0
-                for item in temp:
-                    temp_length += len(item)
+                line_length = sum(map(len, current_line))
+                spaces = len(current_line)
 
-                gap = len(temp)
-                if temp_length + gap + len(cur) > maxWidth:
-                    result.append(temp)
-                    temp = [words.popleft()]
+                if line_length + spaces + len(current_word) > maxWidth:
+                    result.append(current_line)
+                    current_line = [words.popleft()]
                 else:
-                    temp.append(words.popleft())
-        result.append(temp)
+                    current_line.append(words.popleft())
 
-        result2 = []
-        for item in result:
-            used = 0
-            for char in item:
-                used += len(char)
-            possible_gap = maxWidth - used
-            # print(possible_gap)
-            tt = []
-            if len(item) == 1:
-                result2.append("".join(item))
+        result.append(current_line)
+
+        justified_lines = []
+        for line in result:
+            used_length = sum(map(len, line))
+            remaining_spaces = maxWidth - used_length
+            justified_line = []
+
+            if len(line) == 1:
+                justified_lines.append("".join(line))
                 continue
-            a, b = divmod(possible_gap, len(item) - 1)
-            if b == 0:
-                for char in item:
-                    tt.append(char)
-                    tt.append(" " * a)
-                tt.pop()
-                result2.append("".join(tt))
-                continue
-            # print(item, a, b)
-            bb = b
-            for i in range(len(item)):
-                tt.append(item[i])
-                if i == len(item) - 1:
+
+            equal_spaces, extra_spaces = divmod(remaining_spaces, len(line) - 1)
+
+            for i, word in enumerate(line):
+                justified_line.append(word)
+
+                if i == len(line) - 1:
                     continue
-                tt.append(" " * a)
-                # print(1)
-                # print(bb)
-                if bb > 0:
-                    # print("!")
-                    tt.append(" ")
-                    bb -= 1
-                # print(tt)
-            # print(2)
-            # print(tt)
-            # print(bb)
-            result2.append("".join(tt))
-            # print(len("".join(tt)))
-        if result2:
-            last_one = result2[-1]
-            # print(last_one)
-            # print(last_one.split())
-            last_one = " ".join(last_one.split())
-            result2.pop()
-            result2.append(last_one)
-        result3 = []
-        for item in result2:
-            result3.append(item.ljust(maxWidth))
 
-        # for item in result3:
-        #     print(item)
-        #     print(len(item))
-        return result3
+                justified_line.append(" " * equal_spaces)
+
+                if extra_spaces > 0:
+                    justified_line.append(" ")
+                    extra_spaces -= 1
+
+            justified_lines.append("".join(justified_line))
+
+        if justified_lines:
+            last_line = justified_lines[-1]
+            justified_lines.pop()
+            justified_lines.append(" ".join(last_line.split()))
+
+        return [line.ljust(maxWidth) for line in justified_lines]
