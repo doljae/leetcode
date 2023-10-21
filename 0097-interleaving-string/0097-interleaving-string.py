@@ -3,28 +3,32 @@
 # 예를 들어 s1을 4개로, s2를 2개로 쪼개서 s3를 만들 수 있다고 가정하면
 # s1 2개는 붙어있게 되는데 이걸 붙이면 s1 3개로, s2를 2개로 쪼개서 s3를 만든것과 동일함
 # 즉 쪼개는 갯수와 상관 없이 만들 수만 있으면 됨...
-from functools import cache
 
 
 class Solution:
     def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
-
-        if len(s1) + len(s2) != len(s3):
+        left_len, right_len = len(s1), len(s2)
+        target_len = len(s3)
+        if left_len + right_len != target_len:
             return False
 
-        @cache
-        def dfs(left, right):
-            if left == len(s1) and right == len(s2):
-                return True
+        dp = [[False] * (right_len + 1) for _ in range(left_len + 1)]
 
-            t1, t2 = False, False
+        dp[0][0] = True
 
-            if left < len(s1) and s1[left] == s3[left + right]:
-                t1 = dfs(left + 1, right)
+        for i in range(1, left_len + 1):
+            dp[i][0] = dp[i - 1][0] and (s1[i - 1] == s3[i - 1])
+        for i in range(1, right_len + 1):
+            dp[0][i] = dp[0][i - 1] and (s2[i - 1] == s3[i - 1])
 
-            if right < len(s2) and s2[right] == s3[left + right]:
-                t2 = dfs(left, right + 1)
+        for i in range(1, left_len + 1):
+            for j in range(1, right_len + 1):
+                r1, r2 = False, False
+                if s1[i - 1] == s3[i + j - 1]:
+                    r1 = dp[i - 1][j]
+                if s2[j - 1] == s3[i + j - 1]:
+                    r2 = dp[i][j - 1]
 
-            return t1 or t2
+                dp[i][j] = r1 or r2
 
-        return dfs(0, 0)
+        return dp[-1][-1]
