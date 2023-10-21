@@ -4,17 +4,18 @@ from collections import deque
 class MyStack:
 
     def __init__(self):
-        self.q1 = deque([])
-        self.q2 = deque([])
+        self.queue = deque([])
 
     def push(self, x: int) -> None:
-        self.q1.append(x)
+        self.queue.append(x)
+        for i in range(len(self.queue) - 1):
+            self.queue.append(self.queue.popleft())
 
     def pop(self) -> int:
-        return self.q1.pop()
+        return self.queue.popleft()
 
     def top(self) -> int:
-        return self.q1[-1]
+        return self.queue[0]
 
     def empty(self) -> bool:
-        return len(self.q1) == 0
+        return len(self.queue) == 0
