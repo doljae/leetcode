@@ -12,6 +12,10 @@ class Solution:
         if left_len + right_len != target_len:
             return False
 
+        if left_len < right_len:
+            left_len, right_len = right_len, left_len
+            s1, s2 = s2, s1
+
         # dp = [[False] * (right_len + 1) for _ in range(left_len + 1)]
         dp = [False] * (right_len + 1)
 
