@@ -8,22 +8,23 @@ from functools import cache
 
 class Solution:
     def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
-        len1, len2, len3 = len(s1), len(s2), len(s3)
 
-        if len1 + len2 != len3:
+        if len(s1) + len(s2) != len(s3):
             return False
 
         @cache
         def dfs(left, right):
-            if left == len1 and right == len2:
+            if left == len(s1) and right == len(s2):
                 return True
 
-            case1, case2 = False, False
-            if left < len1 and s1[left] == s3[left + right]:
-                case1 = dfs(left + 1, right)
-            if right < len2 and s2[right] == s3[left + right]:
-                case2 = dfs(left, right + 1)
+            t1, t2 = False, False
 
-            return case1 or case2
+            if left < len(s1) and s1[left] == s3[left + right]:
+                t1 = dfs(left + 1, right)
+
+            if right < len(s2) and s2[right] == s3[left + right]:
+                t2 = dfs(left, right + 1)
+
+            return t1 or t2
 
         return dfs(0, 0)
