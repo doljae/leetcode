@@ -12,23 +12,27 @@ class Solution:
         if left_len + right_len != target_len:
             return False
 
-        dp = [[False] * (right_len + 1) for _ in range(left_len + 1)]
+        # dp = [[False] * (right_len + 1) for _ in range(left_len + 1)]
+        dp = [False] * (right_len + 1)
 
-        dp[0][0] = True
+        dp[0] = True
 
-        for i in range(1, left_len + 1):
-            dp[i][0] = dp[i - 1][0] and (s1[i - 1] == s3[i - 1])
         for i in range(1, right_len + 1):
-            dp[0][i] = dp[0][i - 1] and (s2[i - 1] == s3[i - 1])
+            dp[i] = dp[i - 1] and (s2[i - 1] == s3[i - 1])
 
         for i in range(1, left_len + 1):
+            dp[0] = dp[0] and s1[i - 1] == s3[i - 1]
             for j in range(1, right_len + 1):
                 r1, r2 = False, False
                 if s1[i - 1] == s3[i + j - 1]:
-                    r1 = dp[i - 1][j]
+                    r1 = dp[j]
                 if s2[j - 1] == s3[i + j - 1]:
-                    r2 = dp[i][j - 1]
+                    r2 = dp[j - 1]
 
-                dp[i][j] = r1 or r2
+                dp[j] = r1 or r2
 
-        return dp[-1][-1]
+        # print()
+        # for item in dp:
+        #     print(item)
+
+        return dp[-1]
