@@ -1,15 +1,15 @@
 class Solution:
     def minimumReplacement(self, nums: List[int]) -> int:
-        result = 0
+        n = len(nums)
+        ret = 0
+        prev = nums[n - 1]
+        for ind in range(n - 2, -1, -1):
+            num = nums[ind]
+            k = ceil(num / prev)
 
-        previous_value = nums[-1]
+            # (k - 1) is the minimum number of times you'll have to split
+            ret += k - 1
+            # (num // k) is the maximal number you can create from splitting (k - 1) times
+            prev = num // k
 
-        for i in range(len(nums) - 2, -1, -1):
-            if nums[i] > previous_value:
-                k = (nums[i] + previous_value - 1) // previous_value
-                result += (k - 1)
-                previous_value = nums[i] // k
-            else:
-                previous_value = nums[i]
-
-        return result
+        return ret
