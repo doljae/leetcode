@@ -17,10 +17,10 @@ class Solution:
                 else:
                     while q and q[0] != char:
                         visited.remove(q.popleft())
-                    if q:
-                        visited.remove(q.popleft())
+                    visited.remove(q.popleft())
                     q.append(char)
                     visited.add(char)
+                    
             result = max(result, len(q))
 
         return result
