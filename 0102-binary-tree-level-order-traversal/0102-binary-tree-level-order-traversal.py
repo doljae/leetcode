@@ -24,7 +24,7 @@ class Solution:
                 q.append((cur[0].left, cur[1] + 1))
             if cur[0].right:
                 q.append((cur[0].right, cur[1] + 1))
-        print(board)
+
         answer = []
         for key in board:
             answer.append(board[key])
