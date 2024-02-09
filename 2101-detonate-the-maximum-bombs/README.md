@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/detonate-the-maximum-bombs/">2101. Detonate the Maximum Bombs</a></h2><h3>Medium</h3><hr><div><p>You are given a list of bombs. The <strong>range</strong> of a bomb is defined as the area where its effect can be felt. This area is in the shape of a <strong>circle</strong> with the center as the location of the bomb.</p>
+<h2><a href="https://leetcode.com/problems/detonate-the-maximum-bombs">2101. Detonate the Maximum Bombs</a></h2><h3>Medium</h3><hr><p>You are given a list of bombs. The <strong>range</strong> of a bomb is defined as the area where its effect can be felt. This area is in the shape of a <strong>circle</strong> with the center as the location of the bomb.</p>
 
 <p>The bombs are represented by a <strong>0-indexed</strong> 2D integer array <code>bombs</code> where <code>bombs[i] = [x<sub>i</sub>, y<sub>i</sub>, r<sub>i</sub>]</code>. <code>x<sub>i</sub></code> and <code>y<sub>i</sub></code> denote the X-coordinate and Y-coordinate of the location of the <code>i<sup>th</sup></code> bomb, whereas <code>r<sub>i</sub></code> denotes the <strong>radius</strong> of its range.</p>
 
@@ -8,8 +8,9 @@
 
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2021/11/06/desmos-eg-3.png" style="width: 300px; height: 300px;">
-<pre><strong>Input:</strong> bombs = [[2,1,3],[6,1,4]]
+<img alt="" src="https://assets.leetcode.com/uploads/2021/11/06/desmos-eg-3.png" style="width: 300px; height: 300px;" />
+<pre>
+<strong>Input:</strong> bombs = [[2,1,3],[6,1,4]]
 <strong>Output:</strong> 2
 <strong>Explanation:</strong>
 The above figure shows the positions and ranges of the 2 bombs.
@@ -19,16 +20,18 @@ So the maximum bombs that can be detonated is max(1, 2) = 2.
 </pre>
 
 <p><strong class="example">Example 2:</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2021/11/06/desmos-eg-2.png" style="width: 300px; height: 300px;">
-<pre><strong>Input:</strong> bombs = [[1,1,5],[10,10,5]]
+<img alt="" src="https://assets.leetcode.com/uploads/2021/11/06/desmos-eg-2.png" style="width: 300px; height: 300px;" />
+<pre>
+<strong>Input:</strong> bombs = [[1,1,5],[10,10,5]]
 <strong>Output:</strong> 1
 <strong>Explanation:
 </strong>Detonating either bomb will not detonate the other bomb, so the maximum number of bombs that can be detonated is 1.
 </pre>
 
 <p><strong class="example">Example 3:</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2021/11/07/desmos-eg1.png" style="width: 300px; height: 300px;">
-<pre><strong>Input:</strong> bombs = [[1,2,3],[2,3,1],[3,4,2],[4,5,3],[5,6,4]]
+<img alt="" src="https://assets.leetcode.com/uploads/2021/11/07/desmos-eg1.png" style="width: 300px; height: 300px;" />
+<pre>
+<strong>Input:</strong> bombs = [[1,2,3],[2,3,1],[3,4,2],[4,5,3],[5,6,4]]
 <strong>Output:</strong> 5
 <strong>Explanation:</strong>
 The best bomb to detonate is bomb 0 because:
@@ -46,4 +49,3 @@ Thus all 5 bombs are detonated.
 	<li><code>bombs[i].length == 3</code></li>
 	<li><code>1 &lt;= x<sub>i</sub>, y<sub>i</sub>, r<sub>i</sub> &lt;= 10<sup>5</sup></code></li>
 </ul>
-</div>
