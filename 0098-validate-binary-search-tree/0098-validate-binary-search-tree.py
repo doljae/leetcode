@@ -15,5 +15,5 @@ class Solution:
                 dfs(node.right)
         
         dfs(root)
-        
-        return stack == sorted(stack)
+
+        return stack == sorted(stack) and len(stack) == len(set(stack))
