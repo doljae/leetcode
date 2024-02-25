@@ -1,23 +1,19 @@
-from typing import Optional
-
-
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-
-
 class Solution:
     def isValidBST(self,
-                   root: Optional[TreeNode],
-                   left_max: float = -float("inf"),
-                   right_min: float = float("inf")) -> bool:
+                   root: Optional[TreeNode]) -> bool:
 
         if not root:
-            return True
-
-        if left_max >= root.val or root.val >= right_min:
             return False
 
-        return self.isValidBST(root.left, left_max, root.val) and self.isValidBST(root.right, root.val, right_min)
+        stack = []
+
+        def dfs(node):
+            if node.left:
+                dfs(node.left)
+            stack.append(node.val)
+            if node.right:
+                dfs(node.right)
+        
+        dfs(root)
+        
+        return stack == sorted(stack)
