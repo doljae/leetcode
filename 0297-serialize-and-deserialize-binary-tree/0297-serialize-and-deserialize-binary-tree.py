@@ -1,72 +1,61 @@
-from collections import deque
-
-
-# Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-
 class Codec:
 
     def serialize(self, root):
         if not root:
-            return ""
+            return "*"
 
-        result = [root.val]
+        visited = []
         q = deque([root])
 
         while q:
             cur = q.popleft()
-
-            if cur.left:
-                q.append(cur.left)
-                result.append(cur.left.val)
+            if cur is None:
+                visited.append("*")
+                continue
             else:
-                result.append("*")
+                visited.append(str(cur.val))
 
-            if cur.right:
-                q.append(cur.right)
-                result.append(cur.right.val)
-            else:
-                result.append("*")
+            q.append(cur.left if cur.left else None)
+            q.append(cur.right if cur.right else None)
 
-        while result and result[-1] == "*":
-            result.pop()
-
-        return ".".join(list(map(str, result)))
+        return ".".join(visited)
 
     def deserialize(self, data):
-        if not data:
+        if data == "*":
             return None
 
-        nodes = []
-        for val in data.split("."):
-            if val != "*":
-                nodes.append(int(val))
-            else:
-                nodes.append(None)
+        nodes = list(map(lambda x: int(x) if x != "*" else x, data.split(".")))
 
-        root = TreeNode(nodes[0])
-
+        root = temp = TreeNode(nodes[0])
+        visited = deque([])
         q = deque(nodes[1:])
-        temp_index = 0
-        result = [root]
-        while q:
-            temp = result[temp_index]
-            left = q.popleft()
-            left_node = TreeNode(left)
-            temp.left = left_node if left else None
-            result.append(left_node)
-            if q:
-                right = q.popleft()
-                right_node = TreeNode(right)
-                temp.right = right_node if right else None
-                result.append(right_node)
 
-            temp_index += 1
-            if result[temp_index].val is None:
-                temp_index += 1
+        while q:
+            # left_node, right_node = None, None
+            left = q.popleft()
+            if left == "*":
+                left_node = None
+            else:
+                left_node = TreeNode(left)
+
+            temp.left = left_node
+            visited.append(left_node)
+
+            right = q.popleft()
+            if right == "*":
+                right_node = None
+            else:
+                right_node = TreeNode(right)
+
+            temp.right = right_node
+            visited.append(right_node)
+
+            while visited and visited[0] is None:
+                visited.popleft()
+
+            if not visited:
+                break
+
+            temp = visited.popleft()
 
         return root
