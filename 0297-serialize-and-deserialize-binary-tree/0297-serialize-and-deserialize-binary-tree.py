@@ -8,7 +8,6 @@ from collections import deque
 #         self.left = None
 #         self.right = None
 
-
 class Codec:
 
     def serialize(self, root):
@@ -33,6 +32,9 @@ class Codec:
             else:
                 result.append("*")
 
+        while result and result[-1] == "*":
+            result.pop()
+
         return ".".join(list(map(str, result)))
 
     def deserialize(self, data):
@@ -54,13 +56,17 @@ class Codec:
         while q:
             temp = result[temp_index]
             left = q.popleft()
-            right = q.popleft()
             left_node = TreeNode(left)
-            right_node = TreeNode(right)
-            temp.left = left_node
-            temp.right = right_node
+            temp.left = left_node if left else None
             result.append(left_node)
-            result.append(right_node)
+            if q:
+                right = q.popleft()
+                right_node = TreeNode(right)
+                temp.right = right_node if right else None
+                result.append(right_node)
+
             temp_index += 1
-        
+            if result[temp_index].val is None:
+                temp_index += 1
+
         return root
