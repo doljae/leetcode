@@ -1,3 +1,14 @@
+from collections import deque
+
+
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+
 class Codec:
 
     def serialize(self, root):
@@ -31,7 +42,6 @@ class Codec:
         q = deque(nodes[1:])
 
         while q:
-            # left_node, right_node = None, None
             left = q.popleft()
             if left == "*":
                 left_node = None
