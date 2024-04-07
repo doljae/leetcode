@@ -10,24 +10,22 @@ class Solution:
         if endWord not in dictionary:
             return 0
 
-        q = deque([beginWord])
-        visited = {beginWord}
         result = 1
+        q = deque([(beginWord, result)])
+        visited = {beginWord}
 
         while q:
-            for index in range(len(q)):
-                cur = q.popleft()
-                if cur == endWord:
-                    return result
+            cur_str, cur_cnt = q.popleft()
 
-                for i in range(len(cur)):
-                    for j in range(ord('a'), ord('z') + 1):
-                        temp = cur[:i] + chr(j) + cur[i + 1:]
+            for i in range(len(cur_str)):
+                for j in range(ord('a'), ord('z') + 1):
+                    temp = cur_str[:i] + chr(j) + cur_str[i + 1:]
 
-                        if temp in dictionary and temp not in visited:
-                            q.append(temp)
-                            visited.add(temp)
+                    if temp == endWord:
+                        return cur_cnt + 1
 
-            result += 1
+                    if temp in dictionary and temp not in visited:
+                        q.append((temp, cur_cnt + 1))
+                        visited.add(temp)
 
         return 0
