@@ -13,7 +13,7 @@ class Solution:
                 temp = [char]
                 while char_list and char_list[0].isdigit():
                     temp.append(char_list.popleft())
-                
+
                 int_char = int("".join(temp))
                 if board and board[-1] == "-":
                     board.pop()
@@ -33,6 +33,11 @@ class Solution:
                 while board and board[-1] != "(":
                     temp += board.pop()
                 board.pop()
-                board.append(temp)
+                if board and board[-1] == "-":
+                    board.pop()
+                    board.append(-temp)
+                else:
+                    board.append(temp)
 
+        # print(board)
         return sum(board)
