@@ -29,8 +29,6 @@ class Solution:
                               right + root.val,
                               left + root.val + right)
 
-            print(root.val, left, right, self.result)
-
             return max(root.val,
                        left + root.val,
                        right + root.val)
