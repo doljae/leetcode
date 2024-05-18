@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/maximum-frequency-stack/">895. Maximum Frequency Stack</a></h2><h3>Hard</h3><hr><div><p>Design a stack-like data structure to push elements to the stack and pop the most frequent element from the stack.</p>
+<h2><a href="https://leetcode.com/problems/maximum-frequency-stack/">895. Maximum Frequency Stack</a></h2><h3>Hard</h3><hr><p>Design a stack-like data structure to push elements to the stack and pop the most frequent element from the stack.</p>
 
 <p>Implement the <code>FreqStack</code> class:</p>
 
@@ -7,7 +7,7 @@
 	<li><code>void push(int val)</code> pushes an integer <code>val</code> onto the top of the stack.</li>
 	<li><code>int pop()</code> removes and returns the most frequent element in the stack.
 	<ul>
-		<li>If there is a tie for the most frequent element, the element closest to the stack's top is removed and returned.</li>
+		<li>If there is a tie for the most frequent element, the element closest to the stack&#39;s top is removed and returned.</li>
 	</ul>
 	</li>
 </ul>
@@ -15,8 +15,9 @@
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 
-<pre><strong>Input</strong>
-["FreqStack", "push", "push", "push", "push", "push", "push", "pop", "pop", "pop", "pop"]
+<pre>
+<strong>Input</strong>
+[&quot;FreqStack&quot;, &quot;push&quot;, &quot;push&quot;, &quot;push&quot;, &quot;push&quot;, &quot;push&quot;, &quot;push&quot;, &quot;pop&quot;, &quot;pop&quot;, &quot;pop&quot;, &quot;pop&quot;]
 [[], [5], [7], [5], [7], [4], [5], [], [], [], []]
 <strong>Output</strong>
 [null, null, null, null, null, null, null, 5, 7, 5, 4]
@@ -43,4 +44,3 @@ freqStack.pop();   // return 4, as 4, 5 and 7 is the most frequent, but 4 is clo
 	<li>At most <code>2 * 10<sup>4</sup></code> calls will be made to <code>push</code> and <code>pop</code>.</li>
 	<li>It is guaranteed that there will be at least one element in the stack before calling <code>pop</code>.</li>
 </ul>
-</div>
