@@ -18,12 +18,9 @@ class Solution:
             if not root.left and not root.right:
                 return 1
             if root.left:
-                print(1)
                 left = dfs(root.left)
             if root.right:
-                print(2)
                 right = dfs(root.right)
-            print(left,right)
             if abs(left-right)>1:
                 self.result=False
             
