@@ -23,7 +23,6 @@ class Solution:
             for i in range(p1, m):
                 result.append(nums1[i])
 
-
         for i in range(len(nums1)):
             nums1[i] = result[i]
         
