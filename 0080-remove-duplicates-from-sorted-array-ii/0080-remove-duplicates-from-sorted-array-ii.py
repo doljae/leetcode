@@ -1,26 +1,22 @@
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
+        target_index = 0
+        last_num = -float("inf")
+        last_num_cnt = 0
 
-        cur_num = -1000000
-        cur_cnt = 0
-        write_index = 0
-        for i in range(len(nums)):
-            if cur_num != nums[i]:
-                cur_num = nums[i]
-                cur_cnt = 1
-                nums[write_index] = cur_num
-                write_index += 1
-            else:
-                cur_cnt += 1
-                if cur_cnt > 2:
-                    pass
-                else:
-                    nums[write_index] = cur_num
-                    write_index += 1
-        for i in range(write_index, len(nums)):
-            nums.pop()
-        
-        return len(nums)
+        i = 0
+        while i < len(nums):
+            num = nums[i]
+            if num != last_num:
+                last_num_cnt = 0
+            nums[target_index] = num
+            last_num = num
+            target_index += 1
+            last_num_cnt += 1
+            if last_num_cnt == 2:
+                while i + 1 < len(nums) and last_num == nums[i + 1]:
+                    i += 1
+                last_num_cnt = 0
+            i += 1
 
-        
-            
+        return target_index
